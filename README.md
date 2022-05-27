@@ -5,7 +5,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.6.
 
 ## Quick Start
-```git clone (https://github.com/bogdanszeremeta/Asseco-test.git)```\
+```git clone https://github.com/bogdanszeremeta/Asseco-test.git```\
 ```cd angular-blog```\
 ```npm install```
 
