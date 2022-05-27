@@ -1,0 +1,153 @@
+<div class="container">
+
+  <div *ngIf="!toggle; else blockView">
+
+    <div *ngIf="error; else dataBlock">
+      <div class="title_fz16 block__error">{{error}}</div>
+      <div class="title_fz16 block__error">Wróć za kilka minut :)</div>
+    </div>
+
+    <ng-template #dataBlock>
+
+      <div class="icon" (click)="toggle = !toggle">
+        <img class="icon-tile"
+             src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMThweCIgaGVpZ2h0PSIxOHB4IiB2aWV3Qm94PSIwIDAgMTggMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8ZyBmaWxsPSIjNDk0YzRlIiBmaWxsLXJ1bGU9Im5vbnplcm8iPgogICAgICAgIDxyZWN0IHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHJ4PSIyIi8+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjgiIGhlaWdodD0iOCIgeD0iMTAiIHJ4PSIyIi8+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjgiIGhlaWdodD0iOCIgeD0iMTAiIHk9IjEwIiByeD0iMiIvPgogICAgICAgIDxyZWN0IHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHk9IjEwIiByeD0iMiIvPgogICAgPC9nPgo8L3N2Zz4K'
+             alt="Tile">
+      </div>
+
+      <div class="li" *ngIf="!loading; else loadingBlock">
+        <div class="wrapper">
+          <div class=" wrapper_number">
+            <h2>#</h2>
+          </div>
+          <div class="wrapper_name">
+            <h2>Nazwa productu</h2>
+          </div>
+          <div class="wrapper_date">
+            <h2>Data wydania wersji</h2>
+          </div>
+          <div class="wrapper_price">
+            <h2>Cena (PLN)</h2>
+          </div>
+          <div class="wrapper_action">
+            <h2>Informacja o produkcie</h2>
+          </div>
+        </div>
+
+        <div *ngIf="data.length; else noData" class="block title_fz18">
+
+          <div *ngFor="let product of data; let idx = index" class="block__li">
+            <div class="block__li_number">{{idx + 1 + '.'}}</div>
+            <div class="block__li_name">{{product.productName}}</div>
+            <div class="block__li_date">{{product.lastReleaseDate | date:'yyyy-MM-dd' }}</div>
+
+            <div
+              *ngIf="product.basePrice < 500; else less500"
+              class="block__li_price block__li_price_green">
+              {{ product.basePrice.toFixed(2) }}
+            </div>
+
+            <ng-template #less500>
+              <div class="block__li_price block__li_price_orange">
+                {{ product.basePrice.toFixed(2) }}
+              </div>
+            </ng-template>
+
+            <div class="block__li_action">
+              <button
+                class="btn title_fz16"
+                [routerLink]="['/detail', product.productId]"
+              >
+                Zobacz szczegóły
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+        <ng-template #noData>
+          <p>Coś poszło nie tak...</p>
+        </ng-template>
+      </div>
+
+      <ng-template #loadingBlock>
+        <div class="ring">Ładowanie
+          <span></span>
+        </div>
+      </ng-template>
+
+    </ng-template>
+
+  </div>
+
+  <ng-template #blockView>
+    <div class="icon" (click)="toggle = !toggle">
+      <img class="icon-tile"
+           src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMThweCIgaGVpZ2h0PSIxOHB4IiB2aWV3Qm94PSIwIDAgMTggMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8ZyBmaWxsPSIjNDk0YzRlIiBmaWxsLXJ1bGU9Im5vbnplcm8iPgogICAgICAgIDxyZWN0IHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHJ4PSIyIi8+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjgiIGhlaWdodD0iOCIgeD0iMTAiIHJ4PSIyIi8+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjgiIGhlaWdodD0iOCIgeD0iMTAiIHk9IjEwIiByeD0iMiIvPgogICAgICAgIDxyZWN0IHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHk9IjEwIiByeD0iMiIvPgogICAgPC9nPgo8L3N2Zz4K'
+           alt="Tile">
+    </div>
+
+    <p *ngIf="error; else dataBlock" class="error">{{error}}</p>
+
+    <ng-template #dataBlock>
+      <div *ngIf="!loading; else loadingBlock">
+
+        <div *ngIf="data.length; else noData" class="catalog">
+
+          <div class="catalog__item" *ngFor="let product of data">
+            <div class="title_fz20 catalog__item_name">{{product.productName}}</div>
+            <div class="title_fz18 catalog__item_name-descr">{{product.productNameDescription}}</div>
+            <div class="title_fz16 catalog__item_date"><strong>Data wydania
+              wersji:</strong> {{product.lastReleaseDate | date:'yyyy-MM-dd'}}</div>
+
+            <div
+              *ngIf="product.basePrice < 500; else less500"
+              class="title_fz18 block__li_price_green catalog__item_price">
+              {{product.basePrice.toFixed(2)}} PLN
+            </div>
+
+            <ng-template #less500>
+              <div class="title_fz18 block__li_price_orange catalog__item_price">
+                {{product.basePrice.toFixed(2)}} PLN
+              </div>
+
+            </ng-template>
+            <div class="catalog__item_action">
+              <button
+                class="btn title_fz16"
+                [routerLink]="['/detail', product.productId]"
+              >
+                Zobacz szczegóły
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+        <ng-template #noData>
+          <p>Coś poszło nie tak...</p>
+        </ng-template>
+      </div>
+
+      <ng-template #loadingBlock>
+        <div class="ring">Ładowanie
+          <span></span>
+        </div>
+      </ng-template>
+
+    </ng-template>
+
+  </ng-template>
+
+  <div appUp id="pageup" (click)="goToTop()">
+    <img
+      src="data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9jdXNhYmxlPSJmYWxzZSIgZGF0YS1wcmVmaXg9ImZhcyIgZGF0YS1pY29uPSJjaGV2cm9uLWNpcmNsZS11cCIgY2xhc3M9InN2Zy1pbmxpbmUtLWZhIGZhLWNoZXZyb24tY2lyY2xlLXVwIGZhLXctMTYiIHJvbGU9ImltZyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+PHBhdGggZmlsbD0iI0M3MDEwMSIgZD0iTTggMjU2QzggMTE5IDExOSA4IDI1NiA4czI0OCAxMTEgMjQ4IDI0OC0xMTEgMjQ4LTI0OCAyNDhTOCAzOTMgOCAyNTZ6bTIzMS0xMTMuOUwxMDMuNSAyNzcuNmMtOS40IDkuNC05LjQgMjQuNiAwIDMzLjlsMTcgMTdjOS40IDkuNCAyNC42IDkuNCAzMy45IDBMMjU2IDIyNi45bDEwMS42IDEwMS42YzkuNCA5LjQgMjQuNiA5LjQgMzMuOSAwbDE3LTE3YzkuNC05LjQgOS40LTI0LjYgMC0zMy45TDI3MyAxNDIuMWMtOS40LTkuNC0yNC42LTkuNC0zNCAweiI+PC9wYXRoPjwvc3ZnPg=="
+      alt="goUp">
+  </div>
+
+</div>
+
+
+

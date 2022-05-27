@@ -1,0 +1,123 @@
+@import "../../style/loading";
+@import "../../style/divider";
+@import "../../style/titles";
+@import "../../style/variables";
+
+.background {
+  min-height: 100vh;
+  position: relative;
+  background: url('../../img/bg.png') fixed no-repeat 50%/cover;
+}
+
+.detail {
+  padding: 10px 0 40px 70px;
+  max-width: 800px;
+
+  &__error {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__price {
+    color: #dc3545;
+  }
+
+  &__wrapper {
+    padding: 15px 8px 2px 8px;
+  }
+
+  &__version, &__descr {
+    padding-left: 25px;
+    position: relative;
+
+    &-descr {
+      margin-top: 15px;
+      text-align: justify;
+
+      &:before {
+        content: '\002A'
+      }
+    }
+
+    &_star:after {
+      content: '\002A'
+    }
+
+    &-prod {
+      margin-left: 27px;
+      text-align: justify;
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      height: 17px;
+      width: 17px;
+      background: #606060;
+      border-radius: 100%;
+      top: 50%;
+      left: -8px;
+      transform: translateY(-50%);
+    }
+  }
+
+  &__variants {
+    position: relative;
+
+    &:before {
+      content: "";
+      height: 1px;
+      width: 55px;
+      position: absolute;
+      background-color: $main-color;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    &-name {
+      padding: 20px 0 0 80px;
+
+      &:before {
+        content: '';
+        position: absolute;
+        height: 13px;
+        width: 13px;
+        background: #606060;
+        border-radius: 100%;
+        top: 50%;
+        left: 55px;
+        transform: translateY(-50%);
+      }
+
+      &_packet {
+        padding: 10px 80px;
+      }
+    }
+
+    &-users {
+      padding-left: 80px;
+    }
+  }
+
+  ul {
+    li {
+      position: relative;
+
+      &:after {
+        content: '';
+        width: 1px;
+        height: 100%;
+        position: absolute;
+        top: -7px;
+        left: 0;
+        background-color: $main-color;
+      }
+    }
+  }
+  
+}

@@ -1,0 +1,105 @@
+<div *ngIf="error; else dataBlock">
+
+  <div class="title_fz16 detail__error">{{error}}</div>
+  <div class="detail__error">
+    <button class="title_fz16 btn" routerLink="/">Strona główna</button>
+  </div>
+
+</div>
+
+<ng-template #dataBlock>
+
+  <div class="background" *ngIf="productDetail as product; else loading">
+
+    <div class="container">
+
+      <div class="detail">
+        <div class="detail__header">
+          <div class="title_fz32">
+            <a href="{{product.productUrl}}" target="_blank">{{product.productName}}</a>
+          </div>
+
+          <div *ngIf="product.basePrice > 0; else free" class="title_fz32 detail__price">
+            Tylko za {{product.basePrice.toFixed(2)}} zł
+          </div>
+
+          <ng-template #free>
+            <div class="title_fz32 detail__price">Za darmo!</div>
+          </ng-template>
+
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="title_fz22">{{product.productNameDescription}}</div>
+
+        <div class="title_fz14">Data wydania ostatniej wersji: {{product.lastReleaseDate | date:'yyyy-MM-dd'}}</div>
+        <div class="detail__wrapper">
+          <div class="detail__descr">
+            <h3 class="title_fz20">Opis produktu</h3></div>
+          <div class="detail__descr-prod">{{product.description}}</div>
+        </div>
+
+        <div class="detail__wrapper">
+          <div class="detail__version">
+            <h3 class="title_fz20 detail__version_star">Dostępna wersja</h3>
+          </div>
+
+          <ul>
+            <li *ngFor="let product of product.variants">
+              <div class="detail__variants">
+                <div class="title_fz18 detail__variants-name">{{product.variantName | titlecase}}</div>
+                <div class="detail__variants-users title_fz14">
+                  <strong>Maksymalna ilość użytkowników:</strong> {{product.maxNumberOfUsers}}</div>
+              </div>
+            </li>
+          </ul>
+
+          <div
+            class="title_fz14 detail__version-descr">
+            {{product.variantDescription}} {{product.eduLicenseDescription}}
+          </div>
+
+        </div>
+
+        <div *ngIf="product.packets" class="detail__wrapper">
+          <div class="detail__version">
+            <h3 class="title_fz20 detail__version_star">Pakiet</h3>
+          </div>
+
+          <ul *ngIf="product.packets">
+            <li *ngFor="let product of product.packets">
+              <div class="detail__variants">
+                <div
+                  class="title_fz18 detail__variants-name detail__variants-name_packet">{{product.packetName | titlecase}}</div>
+              </div>
+            </li>
+          </ul>
+
+          <div *ngIf="product.packetDescription"
+               class="title_fz14 detail__version-descr">
+            {{product.packetDescription}}
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div appUp id="pageup" (click)="goToTop()">
+      <img
+        src="data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9jdXNhYmxlPSJmYWxzZSIgZGF0YS1wcmVmaXg9ImZhcyIgZGF0YS1pY29uPSJjaGV2cm9uLWNpcmNsZS11cCIgY2xhc3M9InN2Zy1pbmxpbmUtLWZhIGZhLWNoZXZyb24tY2lyY2xlLXVwIGZhLXctMTYiIHJvbGU9ImltZyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+PHBhdGggZmlsbD0iI0M3MDEwMSIgZD0iTTggMjU2QzggMTE5IDExOSA4IDI1NiA4czI0OCAxMTEgMjQ4IDI0OC0xMTEgMjQ4LTI0OCAyNDhTOCAzOTMgOCAyNTZ6bTIzMS0xMTMuOUwxMDMuNSAyNzcuNmMtOS40IDkuNC05LjQgMjQuNiAwIDMzLjlsMTcgMTdjOS40IDkuNCAyNC42IDkuNCAzMy45IDBMMjU2IDIyNi45bDEwMS42IDEwMS42YzkuNCA5LjQgMjQuNiA5LjQgMzMuOSAwbDE3LTE3YzkuNC05LjQgOS40LTI0LjYgMC0zMy45TDI3MyAxNDIuMWMtOS40LTkuNC0yNC42LTkuNC0zNCAweiI+PC9wYXRoPjwvc3ZnPg=="
+        alt="goUp">
+    </div>
+
+  </div>
+
+  <ng-template #loading>
+    <div class="ring">Ładowanie
+      <span></span>
+    </div>
+  </ng-template>
+
+</ng-template>
+

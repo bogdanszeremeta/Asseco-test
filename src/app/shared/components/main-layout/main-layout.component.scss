@@ -1,0 +1,17 @@
+@import "../../style/titles";
+
+a {
+  color: white;
+}
+
+.navbar {
+  padding: 15px 30px;
+  width: 100%;
+  opacity: 0.9;
+  background: #484848;
+  color: #fff;
+
+  span {
+    color: #dc3545
+  }
+}
