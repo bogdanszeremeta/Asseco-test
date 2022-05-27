@@ -1,6 +1,13 @@
+
+
 # WAPRO ERP
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.6.
+
+## Quick Start
+```git clone https://github.com/bogdanszeremeta/angular-blog.git```\
+```cd angular-blog```\
+```npm install```
 
 ## Development server
 
