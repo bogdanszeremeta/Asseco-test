@@ -2,6 +2,8 @@
 
 # WAPRO ERP
 
+This project serves as a test task for the position of Angular developer at the international company Asseco BS. The project showcases a list of available products that can be purchased through Asseco's platform. WAPRO ERP programs encompass a suite of applications designed for managing small and medium-sized enterprises, providing support for various departments, including sales, finance, accounting, HR, and mobile workforce.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.6.
 
 ## Quick Start
